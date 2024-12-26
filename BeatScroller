@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class BeatScroller : MonoBehaviour
+{
+    public float beatTempo;  // Speed of the beats in BPM
+    public bool hasStarted; // Tracks whether the game has started
+
+    void Start()
+    {
+        // Convert BPM to units per second
+        beatTempo /= 60f;
+    }
+
+    void Update()
+    {
+        if (!hasStarted)
+        {
+            // Start scrolling when any key is pressed
+            if (Input.anyKeyDown)
+            {
+                hasStarted = true;
+            }
+        }
+        else
+        {
+            // Move object downward over time
+            transform.position -= new Vector3(0f, beatTempo * Time.deltaTime, 0f);
+        }
+    }
+}
